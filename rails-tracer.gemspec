@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'opentracing', '~> 0.3.1'
+  spec.add_dependency 'opentracing', '~> 0.4.0'
   spec.add_dependency "rack-tracer", "~> 0.8.0"
   spec.add_dependency "method-tracer", "~> 1.1"
 
