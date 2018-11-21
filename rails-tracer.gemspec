@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'opentracing', '~> 0.3.1'
-  spec.add_dependency "rack-tracer", "~> 0.3.0"
+  spec.add_dependency "rack-tracer", "~> 0.8.0"
   spec.add_dependency "method-tracer", "~> 1.1"
 
   spec.add_development_dependency "sqlite3"
