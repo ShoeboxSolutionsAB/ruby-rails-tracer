@@ -43,6 +43,8 @@ module ActiveRecord
 
       def start_span(operation_name, tracer: OpenTracing.global_tracer, active_span: nil, start_time: Time.now, **fields)
         connection_config = ::ActiveRecord::Base.connection_config
+        sql_str = fields.fetch(:sql) || ''
+        sql_str = sql_str[0...2000] + " ...there is #{sql_str.size - 2000} more symbols"
 
         span = tracer.start_span(operation_name || DEFAULT_OPERATION_NAME,
                                  child_of: active_span.respond_to?(:call) ? active_span.call : active_span,
@@ -55,7 +57,7 @@ module ActiveRecord
                                   'db.vendor' => connection_config.fetch(:adapter),
                                   'db.connection_id' => fields.fetch(:connection_id, 'unknown'),
                                   'db.cached' => fields.fetch(:cached, false),
-                                  'db.statement' => fields.fetch(:sql),
+                                  'db.statement' => sql_str,
                                   'db.type' => 'sql'
                                  })
         span
